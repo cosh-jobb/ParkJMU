@@ -30,8 +30,7 @@ if ($stmt = $con->prepare($query)) {
 
 
 ?>
-<!---<H4>Lot Selected: <?php echo $thislot;?></H4>
-<H4>Available Number of Spots: <?php echo $available_number_of_spots;?></H4>--->
+
 
 <!DOCTYPE html>
 <html>
@@ -44,8 +43,62 @@ if ($stmt = $con->prepare($query)) {
 		<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
 		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
 		<link rel="Stylesheet" href="main.css">
+
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+
+		      // Load the Visualization API and the piechart package.
+		      google.load('visualization', '1.0', {'packages':['corechart']});
+
+		      // Set a callback to run when the Google Visualization API is loaded.
+		      google.setOnLoadCallback(drawChart);
+
+		      // Callback that creates and populates a data table,
+		      // instantiates the pie chart, passes in the data and
+		      // draws it.
+		      function drawChart() {
+
+			// Create the data table.
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Status');
+			data.addColumn('number', 'Available');
+			data.addRows([
+			  ['Available', 50],
+			  ['Taken', 350],
+			]);
+
+			// Set chart options
+			var options = {'width':400, 'height':300, 'backgroundColor':'transparent'};
+
+			// Instantiate and draw our chart, passing in some options.
+			var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		      }
+		</script>	
+
+
+
+
+		
+		 <script src="https://maps.googleapis.com/maps/api/js"></script>
+		    <script>
+		      function initialize() {
+			var mapCanvas = document.getElementById('map-canvas');
+			var mapOptions = {
+			  center: new google.maps.LatLng(38.434684, -78.861557),
+			  zoom: 18,
+			  mapTypeId: google.maps.MapTypeId.SATELLITE 
+			}
+			var map = new google.maps.Map(mapCanvas, mapOptions)
+		      }
+		      google.maps.event.addDomListener(window, 'load', initialize);
+		    </script>
+	
+
+		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>
+
 	</head>
 	<body>
 		
@@ -87,18 +140,27 @@ if ($stmt = $con->prepare($query)) {
 						</div>
 
 
-				<div id="map2" style="postion: relative; background-image: url(lotimage_<?php echo $thislot;?>.PNG); background-repeat;no-repeat; width:636px; height:364px"> 
-				<!---<img Style="position:absolute; TOP:300px; LEFT:400px; WIDTH:800px; HEIGHT:550px" src="Right_now_mock_pic.png"> -->
-
+				<!--<div id="map2" style="postion: relative; background-image: url(lotimage_<?php echo $thislot;?>.PNG); background-repeat;no-repeat; width:636px; height:364px"> -->			
+					<!--div that hold the google map-->
+					<div id="map-canvas"></div>
+					
 
 					<p id="spots" style="width:40px;padding:2px;background-color:red;font-weight:bold;font-size:22px;color:white;">	
 					<?php echo $available_number_of_spots;?>
+
+					<!--Div that will hold the pie chart-->
+    					<div id="chart_div"></div>
+
+					
+
 					</p>
-				</div>
+				
 			</div>
 		</div>
 
+			
 
+			
 
 			<div class="about">
 			<div class="container">

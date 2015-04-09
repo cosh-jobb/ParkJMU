@@ -30,10 +30,11 @@
 
 		<div class="nav">
 			<ul class="nav nav-pills">
+				<li role="presentation"><a href="index.html">Home</a></li>
 				<li role="presentation" class="active"><a href="aboutus2.html">About Us</a></li>
 				<li role="presentation"><a href="Right_now.html">Right Now</a></li>
 				<li role="presentation"><a href="#">Projected</a></li>
-				<li role="presentation"><a href="index.html">Home</a></li>
+				
 			</ul>
 		</div>
 		
@@ -130,7 +131,7 @@
 		    						
 									<ul id="face" class="pull-right">
 										<li><a href="https://www.facebook.com/">Like us on facebook!</a></li>
-										<li><a href="https://twitter.com/?lang=enhttps://twitter.com/?lang=en">Tweet us your experiance!</a></li>
+										<li><a href="https://twitter.com/?lang=enhttps://twitter.com/?lang=en">Tweet us your experience!</a></li>
 									</ul>
 									</div>
 								</div>
