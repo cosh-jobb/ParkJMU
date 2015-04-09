@@ -1,0 +1,93 @@
+body{
+	background-color: #F2F2F2; 
+}
+.jumbotron {
+	background-color: #450084;
+	font-family: serif;
+	color: #fff;
+	border-bottom: solid 12px #CBB645;
+
+}
+.jumbotron h1{
+	font-size: 55px;
+}
+
+.jumbotron .container{
+	position:relative;
+	height: 70px;
+	
+}
+
+.nav a {
+  	color:  #CBB645;
+  	font-size: 14px;
+  	font-weight: bold;
+  	padding: 20px 15px;
+  	text-transform: uppercase;
+  	font-family: serif;
+}
+
+.nav {
+	position: relative;
+	left: 15px;
+}
+
+.map img{
+	padding-bottom: 80px;
+}
+
+.dropdown {
+	position: absolute;
+	width:500px;
+	top: -45px;
+	z-index: 5;
+}
+.map .container {
+	position: absolute;
+	top: 195px;
+	left:200px;
+}
+
+#map2{
+	position: absolute;
+	top: 150px;
+	left:275px;
+}
+
+#spots{
+	position: relative;
+	top: 105px;
+	left:483px;
+}
+
+#dropdown{
+	position: relative;
+	top: 100px;
+	left: 200px;
+}
+
+.about{
+	position: relative;
+	top: 570px;
+	left: 0px;
+	font-size: 14px;
+  	font-weight: bold;
+  	font-family: serif;
+}
+
+.about li{
+	list-style-type: none;
+}
+
+.about .panel > .panel-heading{
+	background-image: none;
+	background-color: #CBB645;
+}
+#face{
+	position: relative;
+	top: -55px;
+	font-size: 20px;
+  	font-weight: bold;
+  	font-family: serif;
+
+}

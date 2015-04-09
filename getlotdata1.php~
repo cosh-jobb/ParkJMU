@@ -1,0 +1,86 @@
+<?php 
+#help from: http://www.w3schools.com/php/php_mysql_connect.asp to connect
+#Michael Garcia
+#ISAT306	
+#Parking
+
+#call this but replace localhost with ip of server http://134....65.63/getlotdata.php?lot=C10
+#if dont pass a parameter u get all the results
+#stackoverflow.com/questions/24016142/how-to-make-an-http-request-in-swift
+#let url- NSURL(string:"http://
+#let request= NSURLRequest(URl:ur1!)
+
+# Set up default variable values to use
+$host="localhost";
+$thislot="";
+if (array_key_exists("lot",$_GET)) {
+	$thislot=$_GET['lot'];
+}
+# Collect the value for query string parameter 'lot' and save it in variable 'thislot' to be used later in the process
+$port=3306;
+$socket="";
+$user="root";
+$password="hellocheckin";
+$dbname="Parking";
+# connect to MYSQL database using variable values defined above.
+$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
+	or die ('Could not connect to the database server' . mysqli_connect_error());
+
+// Check connection
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+} 
+# If connection is successful, retrieve the data for a particular lot record.
+# The desired lot record such as "D2" is passed to this module via a query string parameter from the mainmenu.html file.
+# On that file once the users selects the lot it submits
+# the request like showlot.php?lot=XX,where XX is the actual value of the desired lot to look for.
+
+$query = "SELECT * FROM Parking.lot Where lot_name= '$thislot'";
+
+$jason_array = array();
+$post = array();
+
+if (empty($thislot)) {
+	$query = "SELECT lot_name='C10' FROM Parking.lot";
+}
+
+if ($stmt = $con->prepare($query)) {
+    # if succesfull in getting the specific lot record data then;
+	# save the values of the table field into local variables.
+	# the value for available_number_of_spots field which will be display on this form below
+    # using phps's echo command 
+    #$stmt->execute();
+    #$stmt->bind_result($lot_name, $location, $capacity_of_spots, $available_number_of_spots, $time_c, $time_f, $backup_lot);
+    #$i=1;
+    #while ($stmt->fetch()) {
+        
+    $result=$con->query($query);
+     
+    while ($row = $result->fetch_assoc()) { 
+  	    $lot_name = $row['lot_name'];
+       $location = $row['location'];
+       $capacity_of_spots= $row['capacity_of_spots'];
+       $available_number_of_spots= $row['available_number_of_spots'];
+       $time_c = $row['time_c'];
+       $time_f = $row['time_f'];
+       $backup_lot = $row['backup_lot'];
+        
+        
+        $post[] = array('lot_name'=>$lot_name,
+          	           	'location'=>$location,
+        				'capacity_of_spots'=>$capacity_of_spots,
+        				'available_number_of_spots'=>$available_number_of_spots,
+        				'time_c'=> $time_c,
+        				'time_f'=> $time_f,
+        				'backup_lot'=> $backup_lot);
+   
+        
+        #//push the values in the array
+
+    #$i=$i+1;
+    }
+}
+    $response['LotResults']=$post;
+    $stmt->close();
+    echo json_encode ($response)
+?>
